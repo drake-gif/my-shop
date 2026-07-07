@@ -1,0 +1,9 @@
+{
+  "name": "my-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Online shop with M-Pesa STK push and a secret admin panel",
+  "dependencies": {
+    "firebase-admin": "^12.1.0"
+  }
+}

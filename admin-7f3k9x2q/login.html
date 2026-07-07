@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Login</title>
+<link rel="stylesheet" href="../css/admin.css">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-box">
+    <h1>Admin Login</h1>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <p class="err" id="err"></p>
+    <button class="primary" id="loginBtn" style="width:100%">Log in</button>
+  </div>
+</div>
+
+<script src="../js/firebase-config.js"></script>
+<script>
+/*
+  ADMIN LOGIN LOGIC
+  ------------------
+  Firebase Authentication only understands emails, not "usernames". So behind the
+  scenes every admin username is stored as username@yourshop.local in Firebase Auth,
+  and their real display "username" + role live in Firestore collection "admins".
+  This lets you type a plain username on screen while Firebase still does the real
+  password checking + security.
+*/
+document.getElementById("loginBtn").addEventListener("click", async ()=>{
+  const username = document.getElementById("username").value.trim().toLowerCase();
+  const password = document.getElementById("password").value;
+  const err = document.getElementById("err");
+  err.textContent = "";
+  if(!username || !password){ err.textContent = "Enter username and password."; return; }
+
+  const email = username + "@yourshop.local";
+  try{
+    await auth.signInWithEmailAndPassword(email, password);
+    window.location.href = "dashboard.html";
+  }catch(e){
+    err.textContent = "Invalid username or password.";
+  }
+});
+</script>
+</body>
+</html>

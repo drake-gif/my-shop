@@ -1,0 +1,48 @@
+/*
+  FIRESTORE SECURITY RULES
+  -------------------------
+  Paste this into Firebase Console > Firestore Database > Rules, then click "Publish".
+  This is what actually keeps customers from editing products/prices/admins directly —
+  hiding the admin page's URL is NOT security by itself, these rules are.
+
+  Logic:
+  - "products" + "settings/deliveryLocations": everyone can READ (so the shop displays),
+    only a signed-in admin can WRITE (add/edit/delete items, change delivery list).
+  - "orders": anyone can CREATE (so checkout works without forcing customers to log in),
+    only admins can READ or DELETE (so customers can't see each other's orders).
+  - "logs" + "admins": only admins can read or write at all.
+*/
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /settings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /orders/{id} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /logs/{id} {
+      allow read, write: if isAdmin();
+    }
+
+    match /admins/{id} {
+      allow read: if isAdmin();
+      allow write: if false; // admins are only created via the Netlify Function
+    }
+  }
+}

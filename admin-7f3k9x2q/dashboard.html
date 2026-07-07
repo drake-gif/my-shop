@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../css/admin.css">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+<div class="admin-shell">
+  <nav class="admin-nav">
+    <div class="logo">Admin</div>
+    <button data-tab="products" class="active">Products</button>
+    <button data-tab="delivery">Delivery locations</button>
+    <button data-tab="orders">Orders</button>
+    <button data-tab="logs">Logs<span id="outOfStockBadge" class="badge-alert" style="display:none">!</span></button>
+    <button data-tab="admins">Admins & password</button>
+    <button id="logoutBtn" style="margin-top:auto;color:#e0645a">Log out</button>
+  </nav>
+
+  <main class="admin-main">
+
+    <!-- ---------------- PRODUCTS ---------------- -->
+    <section class="tab" id="tab-products">
+      <div class="panel">
+        <h2>Add a product</h2>
+        <input id="pName" placeholder="Item name">
+        <input id="pPrice" type="number" placeholder="Price (KES)">
+        <input id="pStock" type="number" placeholder="Stock quantity">
+        <input id="pImage" type="file" accept="image/*">
+        <button class="primary" id="addProductBtn">Add item</button>
+      </div>
+      <div class="panel">
+        <h2>Your items</h2>
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Price</th><th>Stock</th><th>Visible to customers</th><th></th></tr></thead>
+          <tbody id="productsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------------- DELIVERY LOCATIONS ---------------- -->
+    <section class="tab" id="tab-delivery" style="display:none">
+      <div class="panel">
+        <h2>Delivery locations (shown as a dropdown to customers)</h2>
+        <input id="newLocation" placeholder="e.g. Nairobi CBD">
+        <button class="primary" id="addLocationBtn">Add location</button>
+        <table style="margin-top:14px"><tbody id="locationsTable"></tbody></table>
+      </div>
+    </section>
+
+    <!-- ---------------- ORDERS ---------------- -->
+    <section class="tab" id="tab-orders" style="display:none">
+      <div class="panel">
+        <h2>Orders</h2>
+        <table>
+          <thead><tr><th>Placed</th><th>Total</th><th>Delivery</th><th>Phone</th><th>Status</th></tr></thead>
+          <tbody id="ordersTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------------- LOGS ---------------- -->
+    <section class="tab" id="tab-logs" style="display:none">
+      <div class="panel">
+        <h2>Activity logs</h2>
+        <button class="danger" id="clearLogsBtn">Delete all logs</button>
+        <table style="margin-top:14px">
+          <thead><tr><th>Time</th><th>Type</th><th>Details</th><th></th></tr></thead>
+          <tbody id="logsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---------------- ADMINS ---------------- -->
+    <section class="tab" id="tab-admins" style="display:none">
+      <div class="panel">
+        <h2>Change your password</h2>
+        <input id="newPassword" type="password" placeholder="New password (min 6 characters)">
+        <button class="primary" id="changePasswordBtn">Update password</button>
+      </div>
+      <div class="panel">
+        <h2>Add another admin</h2>
+        <input id="newAdminUser" placeholder="New admin username">
+        <input id="newAdminPass" type="password" placeholder="Temporary password">
+        <button class="primary" id="addAdminBtn">Create admin</button>
+        <p style="color:#8b909c;font-size:.85rem">This calls a protected Netlify Function — see netlify/functions/create-admin.js</p>
+      </div>
+      <div class="panel">
+        <h2>Current admins</h2>
+        <table><tbody id="adminsTable"></tbody></table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../js/firebase-config.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

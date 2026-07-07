@@ -1,0 +1,5 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# No build command needed — this is a plain HTML/CSS/JS site, nothing to compile.

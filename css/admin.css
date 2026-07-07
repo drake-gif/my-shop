@@ -1,0 +1,46 @@
+/* =========================================================
+   ADMIN THEME — same dark base, cool teal accent so it never
+   feels like the public shop, even before you read the URL.
+   ========================================================= */
+:root{
+  --bg:#121317; --surface:#191b20; --surface-2:#20232a;
+  --text:#E7EAEE; --text-dim:#8b909c;
+  --teal:#4FBDBA; --danger:#e0645a; --warn:#e0b25a;
+  --radius:12px; --font-body:"Inter", system-ui, sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--font-body);}
+a{color:var(--teal);}
+
+.admin-shell{display:flex; min-height:100vh;}
+nav.admin-nav{
+  width:220px; background:var(--surface); border-right:1px solid #23262d;
+  padding:20px 14px; display:flex; flex-direction:column; gap:6px;
+}
+nav.admin-nav .logo{color:var(--teal); font-weight:800; margin-bottom:18px; font-size:1.1rem;}
+nav.admin-nav button{
+  background:transparent; border:none; color:var(--text); text-align:left;
+  padding:10px 12px; border-radius:8px; cursor:pointer; font-size:.92rem;
+}
+nav.admin-nav button:hover, nav.admin-nav button.active{background:var(--surface-2); color:var(--teal);}
+.admin-main{flex:1; padding:26px; max-width:1100px;}
+.badge-alert{background:var(--danger); color:#fff; border-radius:20px; font-size:.7rem; padding:1px 7px; margin-left:6px;}
+
+.panel{background:var(--surface); border:1px solid #23262d; border-radius:var(--radius); padding:20px; margin-bottom:20px;}
+.panel h2{margin-top:0; font-size:1.05rem;}
+table{width:100%; border-collapse:collapse; font-size:.9rem;}
+th,td{text-align:left; padding:8px 10px; border-bottom:1px solid #23262d;}
+input, select, textarea{
+  width:100%; padding:9px; border-radius:8px; border:1px solid #2c2f37;
+  background:var(--surface-2); color:var(--text); margin:5px 0;
+}
+button.primary{background:var(--teal); color:#0e1113; border:none; padding:10px 16px; border-radius:8px; font-weight:700; cursor:pointer;}
+button.danger{background:var(--danger); color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;}
+button.small{padding:6px 10px; font-size:.8rem; border-radius:6px; border:1px solid #2c2f37; background:var(--surface-2); color:var(--text); cursor:pointer;}
+
+.login-wrap{display:flex; align-items:center; justify-content:center; min-height:100vh;}
+.login-box{background:var(--surface); padding:34px; border-radius:14px; width:340px; border:1px solid #23262d;}
+.login-box h1{color:var(--teal); font-size:1.2rem; margin-top:0;}
+.err{color:var(--danger); font-size:.85rem; min-height:1.2em;}
+
+.thumb{width:46px; height:46px; object-fit:cover; border-radius:6px; background:#0e0f13;}

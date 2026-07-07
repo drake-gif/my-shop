@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Shop</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Firebase (compat build = plain <script> tags, no build tools needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<!-- QR code generator (client-side, no server needed) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">My Shop</div>
+  <button class="icon-btn" id="cartBtn">🛒 Cart <span id="cartCount">0</span></button>
+</header>
+
+<main>
+  <div class="grid" id="grid"><!-- products render here via shop.js --></div>
+</main>
+
+<footer class="site">
+  <p>Scan to visit this shop on your phone</p>
+  <div id="qrBox"></div>
+</footer>
+
+<!-- Floating contact buttons -->
+<div class="contact-fab">
+  <a id="waBtn" class="wa" target="_blank" rel="noopener">💬 WhatsApp me</a>
+  <a id="callBtn" class="call">📞 Call me</a>
+</div>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<aside id="cartDrawer">
+  <div class="head">
+    <strong>Your cart</strong>
+    <button class="icon-btn" id="closeCart">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="foot">
+    <select id="deliverySelect"><option value="">Select delivery location</option></select>
+    <input id="payerPhone" placeholder="M-Pesa phone e.g. 2547XXXXXXXX">
+    <button class="primary" id="checkoutBtn">Pay with M-Pesa</button>
+  </div>
+</aside>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>
