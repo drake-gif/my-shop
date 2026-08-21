@@ -14,7 +14,13 @@
 */
 
 // ====== 1. YOUR CONTACT NUMBER (used for WhatsApp + Call buttons) ======
-const OWNER_PHONE_INTL = "254712345678"; // <-- change to your number, format 254XXXXXXXXX (no +, no leading 0)
+// Add one or two WhatsApp numbers here, format 254XXXXXXXXX (no +, no leading 0).
+// If you only have one number, just delete the second line inside the array.
+const WHATSAPP_NUMBERS = [
+  { label: "WhatsApp me",      number: "254708260463" }, // <-- replace with your number
+  { label: "WhatsApp (alt)",   number: "254799686161" }  // <-- replace or delete this line
+];
+const OWNER_PHONE_CALL = "254708260463"; // <-- the number used for the "Call me" button
 
 // ---------- State ----------
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -153,8 +159,14 @@ function drawQr(){
 
 // ====== WhatsApp / Call buttons ======
 function wireContactButtons(){
-  document.getElementById("waBtn").href = `https://wa.me/${OWNER_PHONE_INTL}?text=${encodeURIComponent("Hi, I'm interested in an item from your shop")}`;
-  document.getElementById("callBtn").href = `tel:+${OWNER_PHONE_INTL}`;
+  const container = document.getElementById("waButtons");
+  container.innerHTML = WHATSAPP_NUMBERS.map(w => `
+    <a class="wa" target="_blank" rel="noopener"
+       href="https://wa.me/${w.number}?text=${encodeURIComponent("Hi, I'm interested in an item from your shop")}">
+       💬 ${w.label}
+    </a>`).join("");
+
+  document.getElementById("callBtn").href = `tel:+${OWNER_PHONE_CALL}`;
 }
 
 // ====== UI wiring ======
