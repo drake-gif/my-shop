@@ -18,7 +18,7 @@
 // If you only have one number, just delete the second line inside the array.
 const WHATSAPP_NUMBERS = [
   { label: "WhatsApp me",      number: "254708260463" }, // <-- replace with your number
-  { label: "WhatsApp (alt)",   number: "254799686161" }  // <-- replace or delete this line
+  { label: "WhatsApp (alt)",   number: "254798686161" }  // <-- replace or delete this line
 ];
 const OWNER_PHONE_CALL = "254708260463"; // <-- the number used for the "Call me" button
 
