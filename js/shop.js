@@ -17,10 +17,9 @@
 // Add one or two WhatsApp numbers here, format 254XXXXXXXXX (no +, no leading 0).
 // If you only have one number, just delete the second line inside the array.
 const WHATSAPP_NUMBERS = [
-  { label: "WhatsApp me",      number: "254708260463" }, // <-- replace with your number
-  { label: "WhatsApp (alt)",   number: "254798686161" }  // <-- replace or delete this line
+  { label: "WhatsApp me",      number: "254798686161" }, // <-- replace with your number
 ];
-const OWNER_PHONE_CALL = "254708260463"; // <-- the number used for the "Call me" button
+const OWNER_PHONE_CALL = "2547098686161"; // <-- the number used for the "Call me" button
 
 // ---------- State ----------
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
